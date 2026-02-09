@@ -5,10 +5,10 @@
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const tips = [
-        { text: 'Welcome to DhanuTech — Power, Computers, Electronics & Electrical Solutions.', href: 'index.html', cta: 'Home' },
-        { text: 'Explore our Products: laptops, desktops, accessories and more.', href: 'products.html', cta: 'Products' },
-        { text: 'Need service or custom setup? Visit Services and Customization.', href: 'services.html', cta: 'Services' },
-        { text: 'Read latest updates in Blog and contact us for quick support.', href: 'blog.html', cta: 'Blog' }
+        { text: 'Welcome to DhanuTech — your Honey Bee guide for power, computers, electronics and electrical solutions.', href: 'index.html', cta: 'Home' },
+        { text: 'Explore Products: laptops, desktops, CCTV, accessories and business essentials.', href: 'products.html', cta: 'Products' },
+        { text: 'Need custom setup or repair? Visit Services and Customization for quick support.', href: 'services.html', cta: 'Services' },
+        { text: 'Read our latest blog updates and contact us anytime for help.', href: 'blog.html', cta: 'Blog' }
     ];
 
     function start() {
@@ -25,9 +25,14 @@
             <svg class="honey-bee-svg" viewBox="0 0 180 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
                 <defs>
                     <linearGradient id="hb_y" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#fff59d"/>
-                        <stop offset="100%" stop-color="#f59e0b"/>
+                        <stop offset="0%" stop-color="#ffe7a3"/>
+                        <stop offset="60%" stop-color="#f7bf45"/>
+                        <stop offset="100%" stop-color="#d89a2a"/>
                     </linearGradient>
+                    <radialGradient id="hb_fur" cx="42%" cy="35%" r="70%">
+                        <stop offset="0%" stop-color="#fff3c4" stop-opacity="0.65"/>
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                    </radialGradient>
                     <linearGradient id="hb_w" x1="0" y1="0" x2="1" y2="1">
                         <stop offset="0%" stop-color="#ecfeff" stop-opacity="0.95"/>
                         <stop offset="100%" stop-color="#93c5fd" stop-opacity="0.34"/>
@@ -36,6 +41,7 @@
                 <ellipse class="hb-wing hb-wing-left" cx="82" cy="50" rx="22" ry="12" fill="url(#hb_w)" stroke="#60a5fa" stroke-width="1.2"/>
                 <ellipse class="hb-wing hb-wing-right" cx="103" cy="45" rx="22" ry="12" fill="url(#hb_w)" stroke="#60a5fa" stroke-width="1.2"/>
                 <ellipse cx="94" cy="90" rx="34" ry="23" fill="url(#hb_y)" stroke="#6b3f1d" stroke-width="2.8" transform="rotate(-12 94 90)"/>
+                <ellipse cx="90" cy="84" rx="26" ry="15" fill="url(#hb_fur)"/>
                 <path d="M68 84 Q92 72 117 79" stroke="#1f2937" stroke-width="6" fill="none" stroke-linecap="round"/>
                 <path d="M66 95 Q90 84 114 90" stroke="#1f2937" stroke-width="6" fill="none" stroke-linecap="round"/>
                 <path d="M64 106 Q88 96 110 101" stroke="#1f2937" stroke-width="6" fill="none" stroke-linecap="round"/>
@@ -47,6 +53,7 @@
                 <path d="M66 58 Q70 45 77 40" stroke="#2f2f2f" stroke-width="2" fill="none"/>
                 <circle cx="41" cy="39" r="2.4" fill="#2f2f2f"/>
                 <circle cx="78" cy="39" r="2.4" fill="#2f2f2f"/>
+                <path d="M113 84 L130 77 L118 92 L132 100" fill="#c07a22" stroke="#6b3f1d" stroke-width="1.8"/>
             </svg>
         `;
 

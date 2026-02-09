@@ -1428,3 +1428,17 @@ footer {
     padding: 4px 8px;
     border-radius: 8px;
 }
+
+/* Honey-bee visual tune (replace bumble feel with honey tone) */
+.honey-bee-assistant {
+    background: radial-gradient(circle at 34% 28%, rgba(255,248,225,.9), rgba(255,233,177,.26) 58%, transparent 72%);
+}
+
+.honey-bee-svg {
+    filter: drop-shadow(0 3px 3px rgba(111, 67, 21, 0.22));
+}
+
+.honey-bee-assistant .hb-wing-left,
+.honey-bee-assistant .hb-wing-right {
+    opacity: 0.9;
+}
