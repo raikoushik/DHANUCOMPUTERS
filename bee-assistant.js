@@ -1,200 +1,131 @@
 (() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    function start() {
-        const tips = [
-            { text: 'Hi! Welcome to DhanuTech 🌼 We do power, computers, electronics and electrical solutions.', href: 'index.html', cta: 'Explore Home' },
-            { text: 'Need a laptop, desktop or accessory? I can guide you to our products.', href: 'products.html', cta: 'View Products' },
-            { text: 'For custom builds and service support, our team is ready to help.', href: 'customization.html', cta: 'Customization' },
-            { text: 'Want quick help? Let’s connect on Contact page anytime 💛', href: 'contact.html', cta: 'Contact Us' }
-        ];
+    const tips = [
+        { text: 'Welcome to DhanuTech — power, computers, electronics and electrical solutions.', href: 'index.html', cta: 'Home' },
+        { text: 'See latest laptops, desktops and accessories in Products.', href: 'products.html', cta: 'Products' },
+        { text: 'Need custom work or support? Visit Contact for quick help.', href: 'contact.html', cta: 'Contact' }
+    ];
 
-        const scene = document.createElement('div');
-        scene.className = 'bird-scene';
-        scene.innerHTML = `
-            <div class="bird-tree">
-                <div class="bird-tree-crown"></div>
-                <div class="bird-branch"></div>
-                <div class="bird-water" aria-hidden="true"><span></span></div>
-            </div>
-            <div class="bird-grass-row" aria-hidden="true"></div>
-            <div class="bird-flowers" aria-hidden="true">
-                <i class="f f1"></i><i class="f f2"></i><i class="f f3"></i><i class="f f4"></i><i class="f f5"></i>
-            </div>
-        `;
-
+    function startBirdAssistant() {
         const bird = document.createElement('button');
         bird.type = 'button';
         bird.className = 'bird-assistant';
-        bird.setAttribute('aria-label', 'DhanuTech yellow bird assistant');
+        bird.setAttribute('aria-label', 'DhanuTech bird assistant');
         bird.innerHTML = `
-            <svg class="bird-svg" viewBox="0 0 170 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <svg class="bird-svg" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
                 <defs>
-                    <linearGradient id="birdBody" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#fff6bf"/>
-                        <stop offset="60%" stop-color="#facc15"/>
+                    <linearGradient id="birdBodyFill" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#fff5b1"/>
+                        <stop offset="55%" stop-color="#facc15"/>
                         <stop offset="100%" stop-color="#eab308"/>
                     </linearGradient>
                 </defs>
-                <ellipse cx="88" cy="86" rx="44" ry="34" fill="url(#birdBody)" stroke="#854d0e" stroke-width="3"/>
-                <ellipse class="bird-wing" cx="89" cy="89" rx="22" ry="15" fill="#f59e0b"/>
-                <circle cx="56" cy="79" r="18" fill="url(#birdBody)" stroke="#854d0e" stroke-width="2.6"/>
-                <circle cx="51" cy="77" r="4.6" fill="#111827"/>
-                <circle cx="52" cy="75.8" r="1.4" fill="#fff"/>
-                <path d="M40 90 Q48 96 56 90" stroke="#7c2d12" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-                <polygon points="35,81 16,86 35,91" fill="#fb923c"/>
-                <path d="M128 85 L151 76 L132 90 L151 104 Z" fill="#fbbf24" stroke="#92400e" stroke-width="2"/>
-                <path d="M84 117 L82 132" stroke="#7c2d12" stroke-width="3" stroke-linecap="round"/>
-                <path d="M97 117 L96 132" stroke="#7c2d12" stroke-width="3" stroke-linecap="round"/>
-                <ellipse cx="81" cy="133" rx="5" ry="2.8" fill="#7c2d12"/>
-                <ellipse cx="96" cy="133" rx="5" ry="2.8" fill="#7c2d12"/>
+                <ellipse cx="86" cy="84" rx="40" ry="31" fill="url(#birdBodyFill)" stroke="#7c4a16" stroke-width="3"/>
+                <ellipse class="bird-wing" cx="90" cy="87" rx="21" ry="14" fill="#f59e0b"/>
+                <circle cx="56" cy="76" r="18" fill="url(#birdBodyFill)" stroke="#7c4a16" stroke-width="2.6"/>
+                <circle cx="51" cy="74" r="4.6" fill="#111827"/>
+                <circle cx="52.2" cy="72.5" r="1.3" fill="#fff"/>
+                <polygon points="35,76 16,82 35,88" fill="#fb923c"/>
+                <path d="M44 87 Q50 93 57 87" stroke="#9a3412" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M82 113 L80 128" stroke="#7c2d12" stroke-width="3" stroke-linecap="round"/>
+                <path d="M95 113 L94 128" stroke="#7c2d12" stroke-width="3" stroke-linecap="round"/>
+                <ellipse cx="79" cy="129" rx="5" ry="2.7" fill="#7c2d12"/>
+                <ellipse cx="94" cy="129" rx="5" ry="2.7" fill="#7c2d12"/>
             </svg>
         `;
 
         const tooltip = document.createElement('aside');
         tooltip.className = 'bird-tooltip';
 
-        const heartsLayer = document.createElement('div');
-        heartsLayer.className = 'bird-hearts-layer';
+        const loveLayer = document.createElement('div');
+        loveLayer.className = 'bird-love-layer';
 
-        document.body.appendChild(scene);
-        document.body.appendChild(heartsLayer);
+        document.body.appendChild(loveLayer);
         document.body.appendChild(bird);
         document.body.appendChild(tooltip);
 
+        const state = {
+            x: Math.max(30, window.innerWidth - 160),
+            y: Math.max(100, window.innerHeight - 230),
+            tx: Math.max(30, window.innerWidth - 160),
+            ty: Math.max(100, window.innerHeight - 230),
+            t: 0,
+            angle: 0
+        };
+
         let tipIndex = 0;
         let hideTimer;
-        let mode = 'fly';
-        let modeUntil = performance.now() + 7500;
-
-        const state = {
-            x: window.innerWidth - 160,
-            y: window.innerHeight - 210,
-            targetX: window.innerWidth - 160,
-            targetY: window.innerHeight - 210,
-            t: 0,
-            rot: 0,
-            flap: 0
-        };
 
         function showTip(force) {
             if (typeof force === 'number') tipIndex = force % tips.length;
             const item = tips[tipIndex];
             tipIndex = (tipIndex + 1) % tips.length;
-            tooltip.innerHTML = `<p>${item.text}</p><a href="${item.href}" class="bird-link">${item.cta}</a>`;
+            tooltip.innerHTML = `<p>${item.text}</p><a class="bird-link" href="${item.href}">${item.cta}</a>`;
             tooltip.classList.add('show');
             clearTimeout(hideTimer);
-            hideTimer = setTimeout(() => tooltip.classList.remove('show'), 3500);
+            hideTimer = setTimeout(() => tooltip.classList.remove('show'), 3200);
         }
 
         function emitLove(x, y) {
-            const h = document.createElement('span');
-            h.className = 'bird-heart';
-            h.textContent = Math.random() > 0.35 ? '❤' : '✨';
-            h.style.left = `${x}px`;
-            h.style.top = `${y}px`;
-            h.style.setProperty('--dx', `${(Math.random() - 0.5) * 34}px`);
-            heartsLayer.appendChild(h);
-            setTimeout(() => h.remove(), 1300);
+            const node = document.createElement('span');
+            node.className = 'bird-love';
+            node.textContent = Math.random() < 0.7 ? '❤' : '✨';
+            node.style.left = `${x}px`;
+            node.style.top = `${y}px`;
+            node.style.setProperty('--dx', `${(Math.random() - 0.5) * 36}px`);
+            loveLayer.appendChild(node);
+            setTimeout(() => node.remove(), 1250);
         }
 
-        function chooseNextMode() {
-            const r = Math.random();
-            if (r < 0.22) {
-                mode = 'perch';
-                modeUntil = performance.now() + 3600;
-                state.targetX = 120;
-                state.targetY = window.innerHeight - 170;
-                scene.classList.add('active-perch');
-            } else if (r < 0.35) {
-                mode = 'drink';
-                modeUntil = performance.now() + 2600;
-                state.targetX = 165;
-                state.targetY = window.innerHeight - 135;
-                scene.classList.add('active-drink');
-            } else {
-                mode = 'fly';
-                modeUntil = performance.now() + 7200;
-                scene.classList.remove('active-perch', 'active-drink');
-            }
-        }
-
-        function moveToSection() {
-            if (mode !== 'fly') return;
-            const sections = [...document.querySelectorAll('section, .service-section, .page-header')];
-            const mid = window.scrollY + window.innerHeight * 0.5;
-            let nearest = null;
-            let min = Infinity;
-            sections.forEach((s) => {
-                const d = Math.abs(s.offsetTop - mid);
-                if (d < min) {
-                    min = d;
-                    nearest = s;
-                }
-            });
-            if (!nearest) return;
-            const rect = nearest.getBoundingClientRect();
-            state.targetY = Math.min(window.innerHeight - 150, Math.max(110, rect.top + rect.height * 0.3));
-            state.targetX = window.innerWidth - 150;
+        function retarget() {
+            state.tx = 28 + Math.random() * (window.innerWidth - 120);
+            state.ty = 90 + Math.random() * (window.innerHeight - 260);
         }
 
         gsap.ticker.add(() => {
-            const now = performance.now();
             state.t += 0.012;
+            if (Math.abs(state.tx - state.x) < 20 && Math.abs(state.ty - state.y) < 20) retarget();
 
-            if (now > modeUntil) {
-                scene.classList.remove('active-perch', 'active-drink');
-                chooseNextMode();
-            }
+            const ox = Math.sin(state.t * 1.2) * 18;
+            const oy = Math.cos(state.t * 1.7) * 11;
 
-            const ox = Math.sin(state.t * 1.25) * (mode === 'fly' ? 28 : 5);
-            const oy = Math.cos(state.t * 1.9) * (mode === 'fly' ? 16 : 3);
+            state.x += (state.tx + ox - state.x) * 0.05;
+            state.y += (state.ty + oy - state.y) * 0.05;
+            state.angle += ((ox * 0.28) - state.angle) * 0.14;
 
-            state.x += ((state.targetX + ox) - state.x) * 0.08;
-            state.y += ((state.targetY + oy) - state.y) * 0.08;
-            state.rot += (((mode === 'fly' ? ox * 0.3 : -8) - state.rot) * 0.14);
-            state.flap = mode === 'fly' ? Math.sin(state.t * 18) : Math.sin(state.t * 6) * 0.3;
+            bird.style.transform = `translate3d(${state.x}px, ${state.y}px, 0) rotate(${state.angle}deg)`;
+            bird.style.setProperty('--wing', `${Math.sin(state.t * 18) * 16}deg`);
 
-            bird.style.transform = `translate3d(${state.x}px, ${state.y}px, 0) rotate(${state.rot}deg) scale(${mode === 'drink' ? 0.94 : 1})`;
-            bird.style.setProperty('--wing', `${state.flap * 17}deg`);
-
-            tooltip.style.left = `${Math.max(12, state.x - 245)}px`;
+            tooltip.style.left = `${Math.max(12, state.x - 230)}px`;
             tooltip.style.top = `${Math.max(72, state.y - 8)}px`;
 
-            if (Math.random() < 0.09) emitLove(state.x + 35, state.y + 35);
-            if (mode === 'drink' && Math.random() < 0.16) scene.classList.add('splash');
-            if (scene.classList.contains('splash') && Math.random() < 0.2) scene.classList.remove('splash');
+            if (Math.random() < 0.06) emitLove(state.x + 32, state.y + 30);
         });
 
         bird.addEventListener('mouseenter', () => {
             showTip();
             emitLove(state.x + 30, state.y + 10);
-            gsap.to(state, { duration: 0.7, targetY: state.targetY - 22, yoyo: true, repeat: 1, ease: 'power2.inOut' });
         });
 
         bird.addEventListener('click', () => {
             showTip();
-            emitLove(state.x + 46, state.y + 12);
-            emitLove(state.x + 22, state.y + 18);
+            emitLove(state.x + 20, state.y + 16);
+            emitLove(state.x + 44, state.y + 16);
         });
 
-        window.addEventListener('scroll', moveToSection, { passive: true });
-        window.addEventListener('resize', () => {
-            state.targetX = window.innerWidth - 150;
-            state.targetY = Math.min(state.targetY, window.innerHeight - 120);
-        });
-
-        chooseNextMode();
+        window.addEventListener('resize', retarget);
+        retarget();
         showTip(0);
-        setInterval(() => showTip(), 11000);
+        setInterval(() => showTip(), 10000);
     }
 
     if (window.gsap) {
-        start();
+        startBirdAssistant();
     } else {
-        const s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
-        s.onload = start;
-        document.head.appendChild(s);
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
+        script.onload = startBirdAssistant;
+        document.head.appendChild(script);
     }
 })();
