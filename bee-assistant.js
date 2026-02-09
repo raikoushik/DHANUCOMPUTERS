@@ -73,10 +73,12 @@
             ty: Math.max(110, window.innerHeight - 290),
             t: 0,
             angle: 0,
-            retargetAt: performance.now() + 1000,
+            retargetAt: performance.now() + 1400,
             paused: false,
             rafId: 0,
-            mode: 'fly'
+            mode: 'fly',
+            hovering: false,
+            announceUntil: 0
         };
 
         let tipIndex = 0;
@@ -90,39 +92,46 @@
             tip.classList.add('show');
             clearTimeout(hideTimer);
             hideTimer = setTimeout(() => tip.classList.remove('show'), 3200);
+
+            state.announceUntil = performance.now() + 2600;
+            state.paused = true;
+            setTimeout(() => {
+                if (!state.hovering && performance.now() >= state.announceUntil) state.paused = false;
+            }, 2700);
         }
 
         function retarget() {
             const margin = 90;
-            state.mode = Math.random() < 0.2 ? 'hover' : 'fly';
+            state.mode = Math.random() < 0.25 ? 'hover' : 'fly';
             state.tx = margin + Math.random() * Math.max(140, window.innerWidth - margin * 2);
             state.ty = 100 + Math.random() * Math.max(120, window.innerHeight - 330);
-            state.retargetAt = performance.now() + (state.mode === 'hover' ? 1700 : 1100) + Math.random() * 900;
+            state.retargetAt = performance.now() + (state.mode === 'hover' ? 2100 : 1700) + Math.random() * 1300;
         }
 
         function tick(now) {
-            state.t += 0.02;
+            state.t += 0.016;
+            const inAnnouncement = now < state.announceUntil;
 
-            if (!state.paused) {
+            if (!state.paused && !inAnnouncement) {
                 if (now > state.retargetAt || (Math.abs(state.tx - state.x) < 14 && Math.abs(state.ty - state.y) < 14)) retarget();
 
-                const drift = state.mode === 'hover' ? 8 : 18;
-                const ox = Math.sin(state.t * 1.9) * drift;
-                const oy = Math.cos(state.t * 2.2) * (state.mode === 'hover' ? 6 : 10);
-                state.x += (state.tx + ox - state.x) * (state.mode === 'hover' ? 0.06 : 0.082);
-                state.y += (state.ty + oy - state.y) * (state.mode === 'hover' ? 0.06 : 0.082);
-                state.angle += (((state.mode === 'hover' ? 0 : ox * 0.28)) - state.angle) * 0.18;
+                const drift = state.mode === 'hover' ? 5 : 12;
+                const ox = Math.sin(state.t * 1.5) * drift;
+                const oy = Math.cos(state.t * 1.8) * (state.mode === 'hover' ? 4 : 7);
+                state.x += (state.tx + ox - state.x) * (state.mode === 'hover' ? 0.042 : 0.056);
+                state.y += (state.ty + oy - state.y) * (state.mode === 'hover' ? 0.042 : 0.056);
+                state.angle += (((state.mode === 'hover' ? 0 : ox * 0.2)) - state.angle) * 0.11;
             }
 
-            const z = (Math.sin(state.t * 0.9) + 1) * 0.5;
-            const scale = 1 + z * 0.08;
+            const z = (Math.sin(state.t * 0.7) + 1) * 0.5;
+            const scale = 1 + z * 0.06;
             bee.style.transform = `translate3d(${state.x}px, ${state.y}px, 0) rotate(${state.angle}deg) scale(${scale})`;
-            bee.style.setProperty('--hb-wing', `${Math.sin(state.t * 56) * 32}deg`);
+            bee.style.setProperty('--hb-wing', `${Math.sin(state.t * 42) * 24}deg`);
 
             shadow.style.left = `${state.x + 42}px`;
             shadow.style.top = `${state.y + 78}px`;
-            shadow.style.transform = `translate(-50%, -50%) scale(${0.86 + (1 - z) * 0.4})`;
-            shadow.style.opacity = `${0.16 + (1 - z) * 0.2}`;
+            shadow.style.transform = `translate(-50%, -50%) scale(${0.9 + (1 - z) * 0.3})`;
+            shadow.style.opacity = `${0.16 + (1 - z) * 0.16}`;
 
             tip.style.left = `${Math.max(12, Math.min(window.innerWidth - 260, state.x - 240))}px`;
             tip.style.top = `${Math.max(64, state.y - 4)}px`;
@@ -131,11 +140,13 @@
         }
 
         bee.addEventListener('mouseenter', () => {
+            state.hovering = true;
             state.paused = true;
             showTip();
         });
         bee.addEventListener('mouseleave', () => {
-            state.paused = false;
+            state.hovering = false;
+            if (performance.now() >= state.announceUntil) state.paused = false;
         });
         bee.addEventListener('click', () => showTip());
         bee.addEventListener('focus', () => showTip());
@@ -151,7 +162,8 @@
                 if (!state.rafId) state.rafId = requestAnimationFrame(tick);
             }
         });
-        setInterval(() => showTip(), 12000);
+
+        setInterval(() => showTip(), 14000);
 
         showTip(0);
         retarget();
