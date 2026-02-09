@@ -888,3 +888,87 @@ footer {
         height: 86px;
     }
 }
+
+/* Corporate-safe realistic bee refinement */
+:root {
+    --bee-x: 50vw;
+    --bee-y: 40vh;
+}
+
+.bee-sky-glow {
+    background:
+        radial-gradient(circle at 86% 11%, rgba(251, 191, 36, 0.34) 0%, rgba(251, 191, 36, 0.08) 24%, transparent 42%),
+        radial-gradient(circle at 50% -18%, rgba(219, 234, 254, 0.5) 0%, transparent 58%);
+}
+
+.bee-assistant {
+    width: 94px;
+    height: 94px;
+}
+
+.bee-body {
+    filter: drop-shadow(0 13px 18px rgba(15, 23, 42, 0.18)) drop-shadow(0 3px 5px rgba(234, 179, 8, 0.2));
+}
+
+.bee-wing {
+    animation: wingRefined 0.17s linear infinite;
+}
+
+.wing-left,
+.wing-right {
+    transform: scaleX(var(--wing-squash, 1));
+    transform-origin: center;
+}
+
+.bee-fur-strands {
+    animation: furShiver 2.1s ease-in-out infinite;
+}
+
+.bee-shadow {
+    position: fixed;
+    width: 52px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.08) 70%, transparent 100%);
+    z-index: 1410;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0) scale(0.8);
+}
+
+.bee-garden {
+    background:
+      radial-gradient(160px 90px at calc(var(--bee-x) + 20px) calc(var(--bee-y) + 120px), rgba(250, 204, 21, 0.2), transparent 70%),
+      linear-gradient(to top, rgba(22, 163, 74, 0.4), rgba(34, 197, 94, 0.08) 45%, transparent 100%);
+}
+
+.bee-garden::before {
+    animation: grassWindSoft 5.8s ease-in-out infinite;
+}
+
+.bee-flower.is-visited {
+    filter: brightness(1.1) saturate(1.08) drop-shadow(0 0 10px rgba(251, 191, 36, 0.48));
+}
+
+.bee-sparkle {
+    animation: sparkleFadeFine 0.95s ease-out forwards;
+}
+
+@keyframes wingRefined {
+    0%, 100% { transform: rotate(-14deg) scaleX(var(--wing-squash, 1)); opacity: 0.72; }
+    50% { transform: rotate(14deg) scaleX(calc(var(--wing-squash, 1) * 0.9)); opacity: 0.56; }
+}
+
+@keyframes furShiver {
+    0%, 100% { opacity: 0.58; }
+    50% { opacity: 0.72; }
+}
+
+@keyframes sparkleFadeFine {
+    0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
+    100% { transform: translate3d(-16px, -22px, 0) scale(0.22); opacity: 0; }
+}
+
+@keyframes grassWindSoft {
+    0%, 100% { transform: translateX(0) skewX(0deg); }
+    50% { transform: translateX(-8px) skewX(1deg); }
+}
