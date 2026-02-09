@@ -1,0 +1,198 @@
+(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    function start() {
+        const tips = [
+            { text: 'Explore our latest products and offers.', href: 'products.html', cta: 'View Products' },
+            { text: 'Need a custom website? We offer web design services.', href: 'services.html', cta: 'Web Design' },
+            { text: 'Talk to us directly on WhatsApp for quick support.', href: 'https://wa.me/919591555095', cta: 'Chat Now' }
+        ];
+
+        const canvas = document.createElement('canvas');
+        canvas.className = 'bee-particle-canvas github-style';
+
+        const bee = document.createElement('button');
+        bee.type = 'button';
+        bee.className = 'bee-assistant github-style';
+        bee.setAttribute('aria-label', 'DhanuTech assistant bee');
+        bee.innerHTML = `
+            <svg class="bee-body" viewBox="0 0 210 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                <defs>
+                    <linearGradient id="rb_y" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#fef3a0"/>
+                        <stop offset="48%" stop-color="#f7c948"/>
+                        <stop offset="100%" stop-color="#d99a1f"/>
+                    </linearGradient>
+                    <radialGradient id="rb_dark" cx="42%" cy="35%" r="72%">
+                        <stop offset="0%" stop-color="#4a3931"/>
+                        <stop offset="100%" stop-color="#221712"/>
+                    </radialGradient>
+                    <radialGradient id="rb_w" cx="52%" cy="35%" r="85%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.86"/>
+                        <stop offset="100%" stop-color="#dbeafe" stop-opacity="0.2"/>
+                    </radialGradient>
+                </defs>
+
+                <!-- thin translucent wings -->
+                <ellipse class="bee-wing wing-left" cx="122" cy="48" rx="15" ry="28" fill="url(#rb_w)" transform="rotate(-18 122 48)"/>
+                <ellipse class="bee-wing wing-right" cx="147" cy="56" rx="14" ry="24" fill="url(#rb_w)" transform="rotate(10 147 56)"/>
+
+                <!-- realistic body volume -->
+                <ellipse cx="101" cy="96" rx="58" ry="41" fill="url(#rb_y)" stroke="#2a1d17" stroke-width="3.5"/>
+                <ellipse cx="83" cy="81" rx="35" ry="27" fill="url(#rb_dark)"/>
+
+                <!-- natural stripe curvature -->
+                <path d="M47 95 C74 84 118 84 145 95 L144 103 C118 96 74 96 48 104 Z" fill="#2a1d17"/>
+                <path d="M52 112 C80 101 122 103 149 116 L148 124 C122 115 80 114 53 122 Z" fill="#2a1d17"/>
+
+                <!-- subtle fur tips -->
+                <g fill="#e7b52f" opacity="0.85">
+                    <path d="M57 63 l4 -7 l4 7z"/><path d="M67 58 l4 -7 l4 7z"/><path d="M77 55 l4 -6 l4 7z"/>
+                    <path d="M88 54 l4 -6 l4 7z"/><path d="M98 55 l4 -6 l4 7z"/>
+                </g>
+
+                <!-- calm trustworthy eyes -->
+                <ellipse cx="78" cy="83" rx="9" ry="10" fill="#fff"/>
+                <ellipse cx="100" cy="85" rx="8" ry="9" fill="#fff"/>
+                <ellipse cx="78" cy="84" rx="5.2" ry="6.1" fill="#111827"/>
+                <ellipse cx="100" cy="86" rx="4.8" ry="5.6" fill="#111827"/>
+                <circle cx="79.5" cy="81.5" r="1.3" fill="#fff"/>
+                <circle cx="101.4" cy="83.4" r="1.2" fill="#fff"/>
+                <path d="M70 75 Q77 71 84 75" stroke="#1f2937" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M92 77 Q99 73 106 77" stroke="#1f2937" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+                <path d="M82 95 Q89 100 96 95" stroke="#7c2d12" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+
+                <!-- legs -->
+                <ellipse cx="74" cy="124" rx="4.8" ry="8" fill="#2a1d17"/>
+                <ellipse cx="94" cy="129" rx="4.8" ry="8" fill="#2a1d17"/>
+                <ellipse cx="113" cy="124" rx="4.8" ry="8" fill="#2a1d17"/>
+
+                <!-- antenna -->
+                <path d="M78 66 Q70 45 56 38" stroke="#2a1d17" stroke-width="2.4" fill="none"/>
+                <path d="M98 67 Q99 46 112 37" stroke="#2a1d17" stroke-width="2.4" fill="none"/>
+                <ellipse cx="55" cy="37" rx="3.8" ry="3" fill="#2a1d17"/>
+                <ellipse cx="113" cy="36" rx="3.8" ry="3" fill="#2a1d17"/>
+            </svg>
+        `;
+
+        const tip = document.createElement('aside');
+        tip.className = 'bee-tooltip github-style';
+
+        document.body.appendChild(canvas);
+        document.body.appendChild(bee);
+        document.body.appendChild(tip);
+
+        const ctx = canvas.getContext('2d');
+        const particles = [];
+        let tipIndex = 0;
+        let hideTimer;
+
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = Math.floor(window.innerWidth * dpr);
+            canvas.height = Math.floor(window.innerHeight * dpr);
+            canvas.style.width = `${window.innerWidth}px`;
+            canvas.style.height = `${window.innerHeight}px`;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function showTip(force) {
+            if (typeof force === 'number') tipIndex = force % tips.length;
+            const item = tips[tipIndex];
+            tipIndex = (tipIndex + 1) % tips.length;
+            const external = item.href.startsWith('http');
+            tip.innerHTML = `<p>${item.text}</p><a href="${item.href}" class="bee-tooltip-link" ${external ? 'target="_blank" rel="noopener noreferrer"' : ''}>${item.cta}</a>`;
+            tip.classList.add('show');
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => tip.classList.remove('show'), 3200);
+        }
+
+        function emit(x, y) {
+            particles.push({ x, y, vx: (Math.random() - 0.5) * 0.2, vy: -0.22, a: 0.8, r: 2 + Math.random() * 2 });
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            for (let i = particles.length - 1; i >= 0; i -= 1) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.a -= 0.02;
+                if (p.a <= 0) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(250, 204, 21, ${p.a})`;
+                ctx.fill();
+            }
+        }
+
+        const state = {
+            x: window.innerWidth - 120,
+            y: window.innerHeight - 170,
+            targetX: window.innerWidth - 120,
+            targetY: window.innerHeight - 170,
+            t: 0,
+            angle: 0
+        };
+
+        gsap.ticker.add(() => {
+            state.t += 0.012;
+            const ox = Math.sin(state.t * 1.4) * 18;
+            const oy = Math.cos(state.t * 1.9) * 12;
+
+            state.x += ((state.targetX + ox) - state.x) * 0.08;
+            state.y += ((state.targetY + oy) - state.y) * 0.08;
+            state.angle += ((ox * 0.25) - state.angle) * 0.12;
+
+            bee.style.transform = `translate3d(${state.x}px, ${state.y}px, 0) rotate(${state.angle}deg)`;
+            tip.style.left = `${Math.max(12, state.x - 210)}px`;
+            tip.style.top = `${Math.max(80, state.y - 10)}px`;
+
+            if (Math.random() < 0.45) emit(state.x + 38, state.y + 58);
+            drawParticles();
+        });
+
+        function moveToCurrentSection() {
+            const sections = [...document.querySelectorAll('section, .service-section, .page-header')];
+            const mid = window.scrollY + window.innerHeight * 0.5;
+            let nearest = null;
+            let min = Infinity;
+            sections.forEach((s) => {
+                const d = Math.abs(s.offsetTop - mid);
+                if (d < min) { min = d; nearest = s; }
+            });
+            if (!nearest) return;
+            const rect = nearest.getBoundingClientRect();
+            state.targetY = Math.min(window.innerHeight - 140, Math.max(120, rect.top + rect.height * 0.28));
+            state.targetX = window.innerWidth - 120;
+        }
+
+        bee.addEventListener('mouseenter', () => {
+            showTip();
+            gsap.to(state, { duration: 0.7, t: state.t + 2.5, ease: 'power2.inOut' });
+        });
+
+        bee.addEventListener('click', () => showTip());
+        window.addEventListener('scroll', moveToCurrentSection, { passive: true });
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            state.targetX = window.innerWidth - 120;
+        });
+
+        resizeCanvas();
+        showTip(0);
+        setInterval(() => showTip(), 10000);
+    }
+
+    if (window.gsap) {
+        start();
+    } else {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
+        s.onload = start;
+        document.head.appendChild(s);
+    }
+})();
