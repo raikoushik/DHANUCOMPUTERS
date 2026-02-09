@@ -1311,3 +1311,20 @@ footer {
     0% { opacity: .95; transform: translate3d(0,0,0) scale(1); }
     100% { opacity: 0; transform: translate3d(var(--dx), -30px, 0) scale(.45); }
 }
+
+/* Hummingbird tuning */
+.bird-assistant.hummingbird {
+    width: 74px;
+    height: 74px;
+    filter: drop-shadow(0 10px 12px rgba(8, 47, 73, 0.28));
+}
+
+.bird-assistant.hummingbird .bird-wing {
+    transform-origin: 102px 78px;
+    transform: rotate(var(--wing-fast, 0deg));
+}
+
+.bird-assistant.hummingbird .bird-wing.right {
+    transform-origin: 114px 86px;
+    transform: rotate(calc(var(--wing-fast, 0deg) * -0.92));
+}

@@ -2,36 +2,39 @@
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const tips = [
-        { text: 'Welcome to DhanuTech — power, computers, electronics and electrical solutions.', href: 'index.html', cta: 'Home' },
-        { text: 'See latest laptops, desktops and accessories in Products.', href: 'products.html', cta: 'Products' },
-        { text: 'Need custom work or support? Visit Contact for quick help.', href: 'contact.html', cta: 'Contact' }
+        { text: 'Hi! I am your hummingbird guide for DhanuTech services and solutions.', href: 'index.html', cta: 'Home' },
+        { text: 'Need laptops, desktops, CCTV or accessories? Check Products.', href: 'products.html', cta: 'Products' },
+        { text: 'Custom builds, service and support are available. Let us help you fast.', href: 'contact.html', cta: 'Contact' }
     ];
 
     function startBirdAssistant() {
         const bird = document.createElement('button');
         bird.type = 'button';
-        bird.className = 'bird-assistant';
-        bird.setAttribute('aria-label', 'DhanuTech bird assistant');
+        bird.className = 'bird-assistant hummingbird';
+        bird.setAttribute('aria-label', 'DhanuTech hummingbird assistant');
         bird.innerHTML = `
-            <svg class="bird-svg" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <svg class="bird-svg" viewBox="0 0 170 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
                 <defs>
-                    <linearGradient id="birdBodyFill" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#fff5b1"/>
-                        <stop offset="55%" stop-color="#facc15"/>
-                        <stop offset="100%" stop-color="#eab308"/>
+                    <linearGradient id="hbBody" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#ecfeff"/>
+                        <stop offset="55%" stop-color="#67e8f9"/>
+                        <stop offset="100%" stop-color="#22d3ee"/>
+                    </linearGradient>
+                    <linearGradient id="hbChest" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#fef08a"/>
+                        <stop offset="100%" stop-color="#facc15"/>
                     </linearGradient>
                 </defs>
-                <ellipse cx="86" cy="84" rx="40" ry="31" fill="url(#birdBodyFill)" stroke="#7c4a16" stroke-width="3"/>
-                <ellipse class="bird-wing" cx="90" cy="87" rx="21" ry="14" fill="#f59e0b"/>
-                <circle cx="56" cy="76" r="18" fill="url(#birdBodyFill)" stroke="#7c4a16" stroke-width="2.6"/>
-                <circle cx="51" cy="74" r="4.6" fill="#111827"/>
-                <circle cx="52.2" cy="72.5" r="1.3" fill="#fff"/>
-                <polygon points="35,76 16,82 35,88" fill="#fb923c"/>
-                <path d="M44 87 Q50 93 57 87" stroke="#9a3412" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-                <path d="M82 113 L80 128" stroke="#7c2d12" stroke-width="3" stroke-linecap="round"/>
-                <path d="M95 113 L94 128" stroke="#7c2d12" stroke-width="3" stroke-linecap="round"/>
-                <ellipse cx="79" cy="129" rx="5" ry="2.7" fill="#7c2d12"/>
-                <ellipse cx="94" cy="129" rx="5" ry="2.7" fill="#7c2d12"/>
+                <ellipse cx="94" cy="82" rx="34" ry="23" fill="url(#hbBody)" stroke="#0e7490" stroke-width="2.8"/>
+                <ellipse cx="80" cy="88" rx="15" ry="12" fill="url(#hbChest)"/>
+                <ellipse class="bird-wing left" cx="96" cy="70" rx="26" ry="10" fill="#dbeafe" fill-opacity="0.9"/>
+                <ellipse class="bird-wing right" cx="112" cy="84" rx="24" ry="9" fill="#e0f2fe" fill-opacity="0.86"/>
+                <circle cx="58" cy="76" r="13" fill="url(#hbBody)" stroke="#0e7490" stroke-width="2.3"/>
+                <circle cx="54" cy="74" r="3.8" fill="#0f172a"/>
+                <circle cx="55" cy="72.8" r="1" fill="#fff"/>
+                <path d="M44 74 L16 72 L44 78" stroke="#d97706" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <path d="M126 82 L151 76 L132 90 L151 100 Z" fill="#0ea5e9" stroke="#0369a1" stroke-width="2"/>
+                <path d="M84 102 Q90 106 97 102" stroke="#155e75" stroke-width="2" fill="none" stroke-linecap="round"/>
             </svg>
         `;
 
@@ -47,9 +50,9 @@
 
         const state = {
             x: Math.max(30, window.innerWidth - 160),
-            y: Math.max(100, window.innerHeight - 230),
+            y: Math.max(90, window.innerHeight - 240),
             tx: Math.max(30, window.innerWidth - 160),
-            ty: Math.max(100, window.innerHeight - 230),
+            ty: Math.max(90, window.innerHeight - 240),
             t: 0,
             angle: 0
         };
@@ -64,43 +67,43 @@
             tooltip.innerHTML = `<p>${item.text}</p><a class="bird-link" href="${item.href}">${item.cta}</a>`;
             tooltip.classList.add('show');
             clearTimeout(hideTimer);
-            hideTimer = setTimeout(() => tooltip.classList.remove('show'), 3200);
+            hideTimer = setTimeout(() => tooltip.classList.remove('show'), 3000);
         }
 
         function emitLove(x, y) {
             const node = document.createElement('span');
             node.className = 'bird-love';
-            node.textContent = Math.random() < 0.7 ? '❤' : '✨';
+            node.textContent = Math.random() < 0.65 ? '❤' : '✨';
             node.style.left = `${x}px`;
             node.style.top = `${y}px`;
-            node.style.setProperty('--dx', `${(Math.random() - 0.5) * 36}px`);
+            node.style.setProperty('--dx', `${(Math.random() - 0.5) * 28}px`);
             loveLayer.appendChild(node);
-            setTimeout(() => node.remove(), 1250);
+            setTimeout(() => node.remove(), 1100);
         }
 
         function retarget() {
-            state.tx = 28 + Math.random() * (window.innerWidth - 120);
-            state.ty = 90 + Math.random() * (window.innerHeight - 260);
+            state.tx = 40 + Math.random() * (window.innerWidth - 140);
+            state.ty = 80 + Math.random() * (window.innerHeight - 260);
         }
 
         gsap.ticker.add(() => {
-            state.t += 0.012;
-            if (Math.abs(state.tx - state.x) < 20 && Math.abs(state.ty - state.y) < 20) retarget();
+            state.t += 0.016;
+            if (Math.abs(state.tx - state.x) < 18 && Math.abs(state.ty - state.y) < 18) retarget();
 
-            const ox = Math.sin(state.t * 1.2) * 18;
-            const oy = Math.cos(state.t * 1.7) * 11;
+            const ox = Math.sin(state.t * 1.8) * 16;
+            const oy = Math.cos(state.t * 2.5) * 10;
 
-            state.x += (state.tx + ox - state.x) * 0.05;
-            state.y += (state.ty + oy - state.y) * 0.05;
-            state.angle += ((ox * 0.28) - state.angle) * 0.14;
+            state.x += (state.tx + ox - state.x) * 0.08;
+            state.y += (state.ty + oy - state.y) * 0.08;
+            state.angle += ((ox * 0.34) - state.angle) * 0.18;
 
             bird.style.transform = `translate3d(${state.x}px, ${state.y}px, 0) rotate(${state.angle}deg)`;
-            bird.style.setProperty('--wing', `${Math.sin(state.t * 18) * 16}deg`);
+            bird.style.setProperty('--wing-fast', `${Math.sin(state.t * 52) * 35}deg`);
 
-            tooltip.style.left = `${Math.max(12, state.x - 230)}px`;
-            tooltip.style.top = `${Math.max(72, state.y - 8)}px`;
+            tooltip.style.left = `${Math.max(12, state.x - 235)}px`;
+            tooltip.style.top = `${Math.max(68, state.y - 6)}px`;
 
-            if (Math.random() < 0.06) emitLove(state.x + 32, state.y + 30);
+            if (Math.random() < 0.05) emitLove(state.x + 28, state.y + 22);
         });
 
         bird.addEventListener('mouseenter', () => {
@@ -110,8 +113,8 @@
 
         bird.addEventListener('click', () => {
             showTip();
-            emitLove(state.x + 20, state.y + 16);
-            emitLove(state.x + 44, state.y + 16);
+            emitLove(state.x + 18, state.y + 14);
+            emitLove(state.x + 42, state.y + 14);
         });
 
         window.addEventListener('resize', retarget);
