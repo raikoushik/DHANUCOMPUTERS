@@ -1267,8 +1267,8 @@ footer {
     position: fixed;
     top: 0;
     left: 0;
-    width: 132px;
-    height: 102px;
+    width: 106px;
+    height: 82px;
     border: none;
     padding: 0;
     background: transparent;
@@ -1429,7 +1429,7 @@ footer {
 .honeybee-helper-text.is-hidden { opacity: 0 !important; }
 
 @media (max-width: 768px) {
-    .honeybee-assistant { width: 116px; height: 90px; }
+    .honeybee-assistant { width: 92px; height: 72px; }
     .honeybee-controls { left: 10px; bottom: 12px; }
     .honeybee-tooltip { max-width: 196px; }
 }

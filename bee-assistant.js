@@ -25,7 +25,10 @@
         lastInteractionAt: performance.now(),
         lastSectionIndex: -1,
         muted: true,
-        hidden: false
+        hidden: false,
+        cursorSpeed: 0,
+        lastCursorX: window.innerWidth * 0.7,
+        lastCursorY: window.innerHeight * 0.35
     };
 
     let bee;
@@ -126,14 +129,14 @@
     }
 
     function clampTarget() {
-        const margin = 24;
-        state.tx = Math.max(margin, Math.min(window.innerWidth - 170, state.tx));
-        state.ty = Math.max(88, Math.min(window.innerHeight - 190, state.ty));
+        const margin = 18;
+        state.tx = Math.max(margin, Math.min(window.innerWidth - 145, state.tx));
+        state.ty = Math.max(88, Math.min(window.innerHeight - 165, state.ty));
     }
 
     function nextPatrolTarget() {
-        state.tx = 38 + Math.random() * Math.max(100, window.innerWidth - 220);
-        state.ty = 98 + Math.random() * Math.max(120, window.innerHeight - 280);
+        state.tx = 24 + Math.random() * Math.max(160, window.innerWidth - 180);
+        state.ty = 90 + Math.random() * Math.max(180, window.innerHeight - 210);
         clampTarget();
     }
 
@@ -245,14 +248,12 @@
 
         if (current >= 0 && current !== state.lastSectionIndex) {
             state.lastSectionIndex = current;
-            const next = sections[Math.min(current + 1, sections.length - 1)] || sections[current];
-            const r = next.getBoundingClientRect();
-            state.tx = Math.min(window.innerWidth - 170, Math.max(28, r.left + 24 + (current % 2 ? 120 : 30)));
-            state.ty = Math.max(90, Math.min(window.innerHeight - 200, r.top + 34));
+            const diagonalX = current % 2 ? (window.innerWidth - 200) : 40;
+            state.tx = diagonalX + Math.random() * 80;
+            state.ty = 96 + Math.random() * Math.max(120, window.innerHeight - 260);
             clampTarget();
+            smartContextTarget();
         }
-
-        smartContextTarget();
     }
 
     function inactivityLoopBehavior(now) {
@@ -278,32 +279,32 @@
         state.t += 0.016;
         inactivityLoopBehavior(now);
 
-        const cursorIdle = now - state.lastPointerMove > 450;
-        if (!cursorIdle) {
+        const cursorIdle = now - state.lastPointerMove > 550;
+        if (!cursorIdle && state.cursorSpeed < 0.32) {
             state.mode = 'follow';
-            state.tx += ((state.cursorX + 78) - state.tx) * 0.04;
-            state.ty += ((state.cursorY - 54) - state.ty) * 0.04;
+            state.tx += ((state.cursorX + 92) - state.tx) * 0.015;
+            state.ty += ((state.cursorY - 62) - state.ty) * 0.015;
         } else if (state.mode === 'follow') {
             state.mode = 'patrol';
             nextPatrolTarget();
         }
 
         if (state.mode === 'loop') {
-            const radius = 85;
+            const radius = 72;
             state.tx = state.cursorX + Math.cos(state.t * 1.8) * radius;
             state.ty = state.cursorY + Math.sin(state.t * 1.8) * radius * 0.75;
         } else if (Math.abs(state.tx - state.x) < 24 && Math.abs(state.ty - state.y) < 24 && Math.random() < 0.03) {
             nextPatrolTarget();
         }
 
-        const driftX = Math.sin(state.t * 1.1) * 9;
-        const driftY = Math.cos(state.t * 1.7) * 7;
+        const driftX = Math.sin(state.t * 1.0) * 6;
+        const driftY = Math.cos(state.t * 1.5) * 5;
 
-        state.vx += ((state.tx + driftX) - state.x) * 0.010;
-        state.vy += ((state.ty + driftY) - state.y) * 0.010;
+        state.vx += ((state.tx + driftX) - state.x) * 0.006;
+        state.vy += ((state.ty + driftY) - state.y) * 0.006;
 
-        state.vx *= 0.92;
-        state.vy *= 0.92;
+        state.vx *= 0.86;
+        state.vy *= 0.86;
 
         state.x += state.vx;
         state.y += state.vy;
@@ -312,7 +313,7 @@
         clampTarget();
         avoidBlockingInteractions();
 
-        if (Math.random() < 0.032) emitSparkle(state.x + 40, state.y + 58);
+        if (Math.random() < 0.02) emitSparkle(state.x + 36, state.y + 50);
 
         if (Math.random() < 0.0016) {
             bee.classList.add('cleaning');
@@ -386,12 +387,21 @@
         });
 
         window.addEventListener('mousemove', (e) => {
+            const now = performance.now();
+            const dt = Math.max(16, now - state.lastPointerMove);
+            const dx = e.clientX - state.lastCursorX;
+            const dy = e.clientY - state.lastCursorY;
+
+            state.cursorSpeed = Math.hypot(dx, dy) / dt;
             state.cursorX = e.clientX;
             state.cursorY = e.clientY;
-            state.lastPointerMove = performance.now();
+            state.lastCursorX = e.clientX;
+            state.lastCursorY = e.clientY;
+            state.lastPointerMove = now;
         }, { passive: true });
 
         window.addEventListener('scroll', onScroll, { passive: true });
+        setInterval(nextPatrolTarget, 6500);
         window.addEventListener('resize', () => {
             clampTarget();
             nextPatrolTarget();
