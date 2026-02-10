@@ -21,7 +21,6 @@
         cursorX: window.innerWidth * 0.7,
         cursorY: window.innerHeight * 0.35,
         lastPointerMove: performance.now(),
-        lastInteractionAt: performance.now(),
         lastSectionIndex: -1,
         muted: true,
         hidden: false,
@@ -52,6 +51,8 @@
         el.type = 'button';
         el.className = 'honeybee-assistant';
         el.setAttribute('aria-label', 'Dhanu Tech helper bee');
+        el.setAttribute('aria-haspopup', 'true');
+        el.setAttribute('aria-expanded', 'false');
         el.innerHTML = `
             <svg class="honeybee-svg" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
                 <defs>
@@ -122,12 +123,28 @@
     function createActionMenu() {
         const node = document.createElement('div');
         node.className = 'honeybee-action-menu';
+        node.id = 'honeybee-action-menu';
+        node.setAttribute('role', 'menu');
         node.innerHTML = `
-            <a href="${WA_LINK}" target="_blank" rel="noopener noreferrer" class="honeybee-action">WhatsApp</a>
-            <a href="services.html" class="honeybee-action">Services</a>
-            <a href="contact.html" class="honeybee-action">Contact</a>
+            <a href="${WA_LINK}" target="_blank" rel="noopener noreferrer" class="honeybee-action" role="menuitem">WhatsApp</a>
+            <a href="services.html" class="honeybee-action" role="menuitem">Services</a>
+            <a href="contact.html" class="honeybee-action" role="menuitem">Contact</a>
         `;
         return node;
+    }
+
+    function closeActionMenu() {
+        state.menuOpen = false;
+        actionMenu.classList.remove('show');
+        bee.classList.remove('interactive');
+        bee.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleActionMenu() {
+        state.menuOpen = !state.menuOpen;
+        actionMenu.classList.toggle('show', state.menuOpen);
+        bee.classList.toggle('interactive', state.menuOpen);
+        bee.setAttribute('aria-expanded', state.menuOpen ? 'true' : 'false');
     }
 
     function emitSparkle(x, y) {
@@ -362,6 +379,7 @@
         helperText = createHelperText();
         controls = createControls();
         actionMenu = createActionMenu();
+        bee.setAttribute('aria-controls', 'honeybee-action-menu');
 
         document.body.appendChild(sparkleLayer);
         document.body.appendChild(bee);
@@ -383,20 +401,16 @@
         bee.addEventListener('mouseenter', () => {
             tooltip.classList.add('show');
             emitSparkle(state.x + 44, state.y + 52);
-            state.lastInteractionAt = performance.now();
         });
 
         bee.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
 
         bee.addEventListener('click', () => {
-            state.menuOpen = !state.menuOpen;
-            actionMenu.classList.toggle('show', state.menuOpen);
-            bee.classList.toggle('interactive', state.menuOpen);
+            toggleActionMenu();
             if (!LOW_END) {
                 emitSparkle(state.x + 30, state.y + 44);
                 emitSparkle(state.x + 50, state.y + 44);
             }
-            state.lastInteractionAt = performance.now();
         });
 
         bee.addEventListener('dblclick', () => {
@@ -408,6 +422,14 @@
                 e.preventDefault();
                 window.open(WA_LINK, '_blank', 'noopener,noreferrer');
             }
+
+            if (e.key === 'Escape' && state.menuOpen) {
+                closeActionMenu();
+            }
+        });
+
+        actionMenu.addEventListener('click', () => {
+            closeActionMenu();
         });
 
         controls.addEventListener('click', (e) => {
@@ -430,15 +452,15 @@
                 bee.classList.toggle('is-hidden', state.hidden);
                 tooltip.classList.toggle('is-hidden', state.hidden);
                 helperText.classList.toggle('is-hidden', state.hidden);
+                actionMenu.classList.toggle('is-hidden', state.hidden);
+                if (state.hidden) closeActionMenu();
                 btn.textContent = state.hidden ? '🐝' : '🙈';
             }
         });
 
         document.addEventListener('click', (e) => {
             if (state.menuOpen && !e.target.closest('.honeybee-assistant, .honeybee-action-menu')) {
-                state.menuOpen = false;
-                actionMenu.classList.remove('show');
-                bee.classList.remove('interactive');
+                closeActionMenu();
             }
         });
 
