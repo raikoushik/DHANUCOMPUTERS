@@ -1262,69 +1262,92 @@ footer {
     filter: brightness(1.06) saturate(1.08) drop-shadow(0 8px 14px rgba(255,255,255,0.28));
 }
 
-/* Lightweight bird assistant (deployment-safe) */
-.bird-assistant {
+/* Honey bee assistant (no banner) */
+.honeybee-assistant {
     position: fixed;
-    width: 78px;
-    height: 78px;
+    width: 114px;
+    height: 90px;
     border: none;
     padding: 0;
     background: transparent;
     z-index: 1600;
     cursor: pointer;
-    transform-origin: 42% 48%;
-    filter: drop-shadow(0 10px 14px rgba(15, 23, 42, 0.24));
+    transform-origin: 42% 50%;
+    filter: drop-shadow(0 12px 14px rgba(15, 23, 42, 0.32));
 }
 
-.bird-svg { width: 100%; height: 100%; display: block; }
-.bird-wing { transform-origin: 90px 87px; transform: rotate(var(--wing, 0deg)); }
+.honeybee-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 
-.bird-tooltip {
+.honeybee-wing {
+    fill: rgba(176, 233, 255, 0.72);
+    stroke: #1e3a8a;
+    stroke-width: 4;
+    transform-origin: 135px 65px;
+}
+
+.honeybee-wing.front {
+    transform: rotate(var(--wing-flutter, 0deg));
+}
+
+.honeybee-wing.back {
+    transform: rotate(calc(var(--wing-flutter, 0deg) * -0.75));
+}
+
+.honeybee-body,
+.honeybee-head {
+    fill: #facc15;
+    stroke: #1f2937;
+    stroke-width: 4;
+}
+
+.honeybee-stripe,
+.honeybee-tail {
+    fill: #111827;
+    opacity: 0.9;
+}
+
+.honeybee-eye-open { fill: #111827; }
+.honeybee-eye-dot { fill: #f8fafc; }
+.honeybee-eye-wink,
+.honeybee-smile,
+.honeybee-leg,
+.honeybee-antenna {
+    stroke: #1f2937;
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+}
+
+.honeybee-cheek { fill: #fb7185; }
+.honeybee-antenna-tip { fill: #1f2937; }
+
+.honeybee-sparkle-layer {
     position: fixed;
-    z-index: 1610;
-    max-width: 230px;
-    background: rgba(13, 17, 23, 0.92);
-    color: #e5e7eb;
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 11px 13px;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: .22s ease;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    inset: 0;
     pointer-events: none;
+    z-index: 1580;
 }
 
-.bird-tooltip.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
-.bird-tooltip p { margin: 0 0 8px; font-size: .88rem; line-height: 1.35; }
-.bird-link { color: #93c5fd; font-weight: 600; text-decoration: none; }
-
-.bird-love-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1580; }
-.bird-love {
+.honeybee-sparkle {
     position: fixed;
-    font-size: 16px;
-    text-shadow: 0 3px 8px rgba(244, 63, 94, 0.45);
-    animation: birdLoveFloat 1.25s ease-out forwards;
+    font-size: 14px;
+    color: #fde047;
+    text-shadow: 0 2px 7px rgba(250, 204, 21, 0.65);
+    animation: honeybeeSparkle .9s ease-out forwards;
 }
 
-@keyframes birdLoveFloat {
-    0% { opacity: .95; transform: translate3d(0,0,0) scale(1); }
-    100% { opacity: 0; transform: translate3d(var(--dx), -30px, 0) scale(.45); }
+@keyframes honeybeeSparkle {
+    0% { opacity: 0.9; transform: translate3d(0, 0, 0) scale(1); }
+    100% { opacity: 0; transform: translate3d(var(--dx), -26px, 0) scale(0.45); }
 }
 
-/* Hummingbird tuning */
-.bird-assistant.hummingbird {
-    width: 74px;
-    height: 74px;
-    filter: drop-shadow(0 10px 12px rgba(8, 47, 73, 0.28));
-}
-
-.bird-assistant.hummingbird .bird-wing {
-    transform-origin: 102px 78px;
-    transform: rotate(var(--wing-fast, 0deg));
-}
-
-.bird-assistant.hummingbird .bird-wing.right {
-    transform-origin: 114px 86px;
-    transform: rotate(calc(var(--wing-fast, 0deg) * -0.92));
+@media (max-width: 768px) {
+    .honeybee-assistant {
+        width: 98px;
+        height: 78px;
+    }
 }

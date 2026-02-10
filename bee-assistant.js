@@ -1,134 +1,111 @@
 (() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const tips = [
-        { text: 'Hi! I am your hummingbird guide for DhanuTech services and solutions.', href: 'index.html', cta: 'Home' },
-        { text: 'Need laptops, desktops, CCTV or accessories? Check Products.', href: 'products.html', cta: 'Products' },
-        { text: 'Custom builds, service and support are available. Let us help you fast.', href: 'contact.html', cta: 'Contact' }
-    ];
+    function startBeeAssistant() {
+        const bee = document.createElement('button');
+        bee.type = 'button';
+        bee.className = 'honeybee-assistant';
+        bee.setAttribute('aria-label', 'DhanuTech honey bee assistant');
+        bee.innerHTML = `
+            <svg class="honeybee-svg" viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                <ellipse class="honeybee-wing back" cx="132" cy="55" rx="34" ry="48" transform="rotate(-14 132 55)"/>
+                <ellipse class="honeybee-wing front" cx="170" cy="75" rx="31" ry="45" transform="rotate(16 170 75)"/>
 
-    function startBirdAssistant() {
-        const bird = document.createElement('button');
-        bird.type = 'button';
-        bird.className = 'bird-assistant hummingbird';
-        bird.setAttribute('aria-label', 'DhanuTech hummingbird assistant');
-        bird.innerHTML = `
-            <svg class="bird-svg" viewBox="0 0 170 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-                <defs>
-                    <linearGradient id="hbBody" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#ecfeff"/>
-                        <stop offset="55%" stop-color="#67e8f9"/>
-                        <stop offset="100%" stop-color="#22d3ee"/>
-                    </linearGradient>
-                    <linearGradient id="hbChest" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#fef08a"/>
-                        <stop offset="100%" stop-color="#facc15"/>
-                    </linearGradient>
-                </defs>
-                <ellipse cx="94" cy="82" rx="34" ry="23" fill="url(#hbBody)" stroke="#0e7490" stroke-width="2.8"/>
-                <ellipse cx="80" cy="88" rx="15" ry="12" fill="url(#hbChest)"/>
-                <ellipse class="bird-wing left" cx="96" cy="70" rx="26" ry="10" fill="#dbeafe" fill-opacity="0.9"/>
-                <ellipse class="bird-wing right" cx="112" cy="84" rx="24" ry="9" fill="#e0f2fe" fill-opacity="0.86"/>
-                <circle cx="58" cy="76" r="13" fill="url(#hbBody)" stroke="#0e7490" stroke-width="2.3"/>
-                <circle cx="54" cy="74" r="3.8" fill="#0f172a"/>
-                <circle cx="55" cy="72.8" r="1" fill="#fff"/>
-                <path d="M44 74 L16 72 L44 78" stroke="#d97706" stroke-width="3" stroke-linecap="round" fill="none"/>
-                <path d="M126 82 L151 76 L132 90 L151 100 Z" fill="#0ea5e9" stroke="#0369a1" stroke-width="2"/>
-                <path d="M84 102 Q90 106 97 102" stroke="#155e75" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <ellipse class="honeybee-body" cx="128" cy="106" rx="66" ry="43" transform="rotate(12 128 106)"/>
+                <ellipse class="honeybee-stripe" cx="108" cy="104" rx="11" ry="36" transform="rotate(12 108 104)"/>
+                <ellipse class="honeybee-stripe" cx="134" cy="108" rx="11" ry="37" transform="rotate(12 134 108)"/>
+                <ellipse class="honeybee-stripe" cx="160" cy="112" rx="10" ry="35" transform="rotate(12 160 112)"/>
+                <path class="honeybee-tail" d="M188 125 L212 140 L188 148 Z"/>
+
+                <circle class="honeybee-head" cx="66" cy="93" r="47"/>
+                <path class="honeybee-smile" d="M50 108 Q62 119 76 109"/>
+
+                <ellipse class="honeybee-eye-open" cx="47" cy="87" rx="7" ry="11"/>
+                <ellipse class="honeybee-eye-dot" cx="49" cy="83" rx="2.2" ry="3"/>
+                <path class="honeybee-eye-wink" d="M72 88 Q82 81 88 88"/>
+
+                <ellipse class="honeybee-cheek" cx="41" cy="102" rx="8" ry="5"/>
+                <ellipse class="honeybee-cheek" cx="86" cy="102" rx="8" ry="5"/>
+
+                <path class="honeybee-leg" d="M113 135 Q105 150 93 151"/>
+                <path class="honeybee-leg" d="M154 139 Q165 153 178 154"/>
+
+                <path class="honeybee-antenna" d="M44 52 Q31 24 21 20"/>
+                <circle class="honeybee-antenna-tip" cx="19" cy="18" r="5"/>
+                <path class="honeybee-antenna" d="M70 51 Q73 25 84 20"/>
+                <circle class="honeybee-antenna-tip" cx="86" cy="18" r="5"/>
             </svg>
         `;
 
-        const tooltip = document.createElement('aside');
-        tooltip.className = 'bird-tooltip';
+        const sparkleLayer = document.createElement('div');
+        sparkleLayer.className = 'honeybee-sparkle-layer';
 
-        const loveLayer = document.createElement('div');
-        loveLayer.className = 'bird-love-layer';
-
-        document.body.appendChild(loveLayer);
-        document.body.appendChild(bird);
-        document.body.appendChild(tooltip);
+        document.body.appendChild(sparkleLayer);
+        document.body.appendChild(bee);
 
         const state = {
-            x: Math.max(30, window.innerWidth - 160),
-            y: Math.max(90, window.innerHeight - 240),
-            tx: Math.max(30, window.innerWidth - 160),
-            ty: Math.max(90, window.innerHeight - 240),
+            x: Math.max(25, window.innerWidth - 250),
+            y: Math.max(70, window.innerHeight - 260),
+            tx: Math.max(25, window.innerWidth - 250),
+            ty: Math.max(70, window.innerHeight - 260),
             t: 0,
             angle: 0
         };
 
-        let tipIndex = 0;
-        let hideTimer;
-
-        function showTip(force) {
-            if (typeof force === 'number') tipIndex = force % tips.length;
-            const item = tips[tipIndex];
-            tipIndex = (tipIndex + 1) % tips.length;
-            tooltip.innerHTML = `<p>${item.text}</p><a class="bird-link" href="${item.href}">${item.cta}</a>`;
-            tooltip.classList.add('show');
-            clearTimeout(hideTimer);
-            hideTimer = setTimeout(() => tooltip.classList.remove('show'), 3000);
-        }
-
-        function emitLove(x, y) {
+        function emitSparkle(x, y) {
             const node = document.createElement('span');
-            node.className = 'bird-love';
-            node.textContent = Math.random() < 0.65 ? '❤' : '✨';
+            node.className = 'honeybee-sparkle';
+            node.textContent = Math.random() < 0.45 ? '✨' : '•';
             node.style.left = `${x}px`;
             node.style.top = `${y}px`;
-            node.style.setProperty('--dx', `${(Math.random() - 0.5) * 28}px`);
-            loveLayer.appendChild(node);
-            setTimeout(() => node.remove(), 1100);
+            node.style.setProperty('--dx', `${(Math.random() - 0.5) * 22}px`);
+            sparkleLayer.appendChild(node);
+            setTimeout(() => node.remove(), 900);
         }
 
         function retarget() {
-            state.tx = 40 + Math.random() * (window.innerWidth - 140);
-            state.ty = 80 + Math.random() * (window.innerHeight - 260);
+            state.tx = 30 + Math.random() * (window.innerWidth - 220);
+            state.ty = 75 + Math.random() * (window.innerHeight - 260);
         }
 
         gsap.ticker.add(() => {
             state.t += 0.016;
-            if (Math.abs(state.tx - state.x) < 18 && Math.abs(state.ty - state.y) < 18) retarget();
+            if (Math.abs(state.tx - state.x) < 22 && Math.abs(state.ty - state.y) < 22) retarget();
 
-            const ox = Math.sin(state.t * 1.8) * 16;
-            const oy = Math.cos(state.t * 2.5) * 10;
+            const ox = Math.sin(state.t * 1.7) * 13;
+            const oy = Math.cos(state.t * 2.3) * 9;
 
-            state.x += (state.tx + ox - state.x) * 0.08;
-            state.y += (state.ty + oy - state.y) * 0.08;
-            state.angle += ((ox * 0.34) - state.angle) * 0.18;
+            state.x += (state.tx + ox - state.x) * 0.07;
+            state.y += (state.ty + oy - state.y) * 0.07;
+            state.angle += ((ox * 0.3) - state.angle) * 0.15;
 
-            bird.style.transform = `translate3d(${state.x}px, ${state.y}px, 0) rotate(${state.angle}deg)`;
-            bird.style.setProperty('--wing-fast', `${Math.sin(state.t * 52) * 35}deg`);
+            bee.style.transform = `translate3d(${state.x}px, ${state.y}px, 0) rotate(${state.angle}deg)`;
+            bee.style.setProperty('--wing-flutter', `${Math.sin(state.t * 38) * 11}deg`);
 
-            tooltip.style.left = `${Math.max(12, state.x - 235)}px`;
-            tooltip.style.top = `${Math.max(68, state.y - 6)}px`;
-
-            if (Math.random() < 0.05) emitLove(state.x + 28, state.y + 22);
+            if (Math.random() < 0.04) emitSparkle(state.x + 34, state.y + 44);
         });
 
-        bird.addEventListener('mouseenter', () => {
-            showTip();
-            emitLove(state.x + 30, state.y + 10);
+        bee.addEventListener('mouseenter', () => {
+            emitSparkle(state.x + 28, state.y + 28);
+            emitSparkle(state.x + 40, state.y + 30);
         });
 
-        bird.addEventListener('click', () => {
-            showTip();
-            emitLove(state.x + 18, state.y + 14);
-            emitLove(state.x + 42, state.y + 14);
+        bee.addEventListener('click', () => {
+            emitSparkle(state.x + 22, state.y + 22);
+            emitSparkle(state.x + 42, state.y + 22);
+            emitSparkle(state.x + 32, state.y + 34);
         });
 
         window.addEventListener('resize', retarget);
         retarget();
-        showTip(0);
-        setInterval(() => showTip(), 10000);
     }
 
     if (window.gsap) {
-        startBirdAssistant();
+        startBeeAssistant();
     } else {
         const script = document.createElement('script');
         script.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
-        script.onload = startBirdAssistant;
+        script.onload = startBeeAssistant;
         document.head.appendChild(script);
     }
 })();
