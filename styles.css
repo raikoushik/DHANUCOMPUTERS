@@ -1685,3 +1685,69 @@ footer {
     .honeybee-tooltip { max-width: 196px; }
     .honeybee-nature-decor { transform: scale(.62); transform-origin: bottom right; right: -22px; bottom: 56px; }
 }
+
+/* Local lead-gen quick contact bar */
+.quick-contact-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1700;
+    display: flex;
+    box-shadow: 0 -8px 22px rgba(15, 23, 42, 0.18);
+}
+
+.quick-contact-bar a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.86rem 0.6rem;
+    font-size: 0.92rem;
+}
+
+.quick-contact-call { background: #0f172a; }
+.quick-contact-whatsapp { background: #16a34a; }
+
+body { padding-bottom: 52px; }
+
+@media (min-width: 768px) {
+    .quick-contact-bar {
+        left: auto;
+        right: 16px;
+        bottom: 16px;
+        width: 320px;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    body { padding-bottom: 0; }
+}
+
+/* Local SEO conversion block */
+.luminous-local-section {
+    background: linear-gradient(135deg, #fefce8 0%, #f8fafc 100%);
+    border-top: 1px solid #f1f5f9;
+    padding: 3rem 1.2rem;
+}
+
+.luminous-local-section .container {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.luminous-local-section .section-tag {
+    color: #92400e;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.luminous-local-ctas {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
