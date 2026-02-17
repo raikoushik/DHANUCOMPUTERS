@@ -1,58 +1,66 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <path id="topArc" d="M 95 512 A 417 417 0 0 1 929 512"/>
-    <path id="bottomArc" d="M 929 512 A 417 417 0 0 1 95 512"/>
+    <path id="topArc" d="M 110 512 A 402 402 0 0 1 914 512"/>
+    <path id="bottomArc" d="M 914 512 A 402 402 0 0 1 110 512"/>
   </defs>
 
-  <!-- Orange circular ring -->
-  <circle cx="512" cy="512" r="346" fill="none" stroke="#f58600" stroke-width="46"/>
+  <!-- Outer orange ring -->
+  <circle cx="512" cy="512" r="338" fill="none" stroke="#f58600" stroke-width="44"/>
 
-  <!-- Brand and tagline text -->
+  <!-- Circular text -->
   <g fill="#b91500" font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" letter-spacing="5">
-    <text font-size="96">
+    <text font-size="94">
       <textPath href="#topArc" startOffset="50%" text-anchor="middle">DHANU COMPUTERS</textPath>
     </text>
-    <text font-size="66">
+    <text font-size="62">
       <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">ONE STEP FOR DIGITAL LIFE</textPath>
     </text>
   </g>
 
-  <!-- Monitor icon -->
+  <!-- Monitor shape -->
   <g fill="#b91500">
-    <path d="M286 333 h451 a22 22 0 0 1 22 22 v250 a22 22 0 0 1 -22 22 h-451 a22 22 0 0 1 -22 -22 v-250 a22 22 0 0 1 22 -22zm27 47 a10 10 0 0 0 -10 10 v180 a10 10 0 0 0 10 10 h397 a10 10 0 0 0 10 -10 v-180 a10 10 0 0 0 -10 -10z"/>
-    <rect x="459" y="611" width="106" height="50" rx="24"/>
-    <path d="M390 676 h244 a84 84 0 0 1 84 84 h-412 a84 84 0 0 1 84 -84z"/>
+    <path d="M300 350 h424 a22 22 0 0 1 22 22 v220 a22 22 0 0 1 -22 22 h-424 a22 22 0 0 1 -22 -22 v-220 a22 22 0 0 1 22 -22zm26 46 a10 10 0 0 0 -10 10 v152 a10 10 0 0 0 10 10 h372 a10 10 0 0 0 10 -10 v-152 a10 10 0 0 0 -10 -10z"/>
+    <rect x="452" y="607" width="120" height="50" rx="25"/>
+    <path d="M398 673 h228 a83 83 0 0 1 83 83 h-394 a83 83 0 0 1 83 -83z"/>
   </g>
 
-  <!-- WiFi icon -->
+  <!-- Wi-Fi icon -->
   <g fill="none" stroke="#f58600" stroke-width="15" stroke-linecap="round">
-    <path d="M228 438 q72 -66 144 0"/>
-    <path d="M247 468 q53 -47 106 0"/>
-    <path d="M267 497 q33 -30 66 0"/>
+    <path d="M252 444 q64 -58 128 0"/>
+    <path d="M269 472 q46 -41 92 0"/>
+    <path d="M286 500 q28 -25 56 0"/>
   </g>
-  <circle cx="300" cy="527" r="12" fill="#f58600"/>
+  <circle cx="314" cy="527" r="11" fill="#f58600"/>
 
-  <!-- Bow -->
+  <!-- Bow + wrap highlights -->
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M640 305 q102 22 132 102 q30 84 -30 149" stroke="#b91500" stroke-width="36"/>
-    <path d="M742 454 q58 65 39 136 q-12 45 -28 67 q-24 43 -4 101" stroke="#b91500" stroke-width="28"/>
-    <path d="M557 307 q66 11 95 0" stroke="#f58600" stroke-width="18"/>
-    <path d="M744 455 q36 20 70 6" stroke="#f58600" stroke-width="18"/>
-    <path d="M748 568 q43 -18 82 5" stroke="#f58600" stroke-width="18"/>
+    <path d="M620 308 q103 12 146 88 q38 70 -13 138" stroke="#b91500" stroke-width="34"/>
+    <path d="M747 455 q57 57 47 122 q-8 48 -30 88 q-24 47 -8 103" stroke="#b91500" stroke-width="30"/>
+    <path d="M548 302 q52 14 92 2" stroke="#f58600" stroke-width="18"/>
+    <path d="M742 449 q40 18 74 2" stroke="#f58600" stroke-width="18"/>
+    <path d="M744 565 q44 -16 83 8" stroke="#f58600" stroke-width="18"/>
+
+    <!-- white wrap marks -->
+    <path d="M685 398 q22 -18 48 -8" stroke="#ffffff" stroke-width="4"/>
+    <path d="M690 411 q23 -17 49 -7" stroke="#ffffff" stroke-width="4"/>
+    <path d="M696 424 q23 -16 49 -6" stroke="#ffffff" stroke-width="4"/>
+    <path d="M722 523 q18 -16 42 -8" stroke="#ffffff" stroke-width="4"/>
+    <path d="M728 535 q20 -15 43 -7" stroke="#ffffff" stroke-width="4"/>
+    <path d="M735 548 q20 -14 44 -6" stroke="#ffffff" stroke-width="4"/>
   </g>
 
-  <!-- String and arrow -->
+  <!-- String + arrow -->
   <g fill="none" stroke="#ef7b00" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="432" y1="270" x2="770" y2="702" stroke-width="5"/>
-    <line x1="432" y1="270" x2="516" y2="545" stroke-width="5"/>
-    <line x1="518" y1="548" x2="744" y2="372" stroke-width="5"/>
-    <line x1="517" y1="548" x2="490" y2="542" stroke-width="5"/>
-    <line x1="517" y1="548" x2="512" y2="581" stroke-width="5"/>
+    <line x1="430" y1="286" x2="758" y2="695" stroke-width="5"/>
+    <line x1="430" y1="286" x2="520" y2="550" stroke-width="5"/>
+    <line x1="520" y1="550" x2="748" y2="372" stroke-width="5"/>
+    <line x1="520" y1="550" x2="486" y2="545" stroke-width="5"/>
+    <line x1="520" y1="550" x2="514" y2="586" stroke-width="5"/>
   </g>
-  <polygon points="744,372 778,360 755,387" fill="none" stroke="#ef7b00" stroke-width="4"/>
-  <polygon points="489,542 470,555 506,558" fill="none" stroke="#ef7b00" stroke-width="4"/>
-  <polygon points="512,580 500,598 537,569" fill="none" stroke="#ef7b00" stroke-width="4"/>
+  <polygon points="748,372 777,360 758,386" fill="none" stroke="#ef7b00" stroke-width="4"/>
+  <polygon points="486,545 465,560 504,562" fill="none" stroke="#ef7b00" stroke-width="4"/>
+  <polygon points="514,586 499,604 541,571" fill="none" stroke="#ef7b00" stroke-width="4"/>
 
-  <!-- Since -->
-  <text x="512" y="796" text-anchor="middle" fill="#b91500" font-family="Arial, Helvetica, sans-serif" font-size="60">since 2013</text>
+  <!-- since -->
+  <text x="512" y="790" text-anchor="middle" fill="#b91500" font-family="Arial, Helvetica, sans-serif" font-size="56">since 2013</text>
 </svg>
