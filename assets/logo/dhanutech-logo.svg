@@ -1,66 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <defs>
-    <path id="topArc" d="M 110 512 A 402 402 0 0 1 914 512"/>
-    <path id="bottomArc" d="M 914 512 A 402 402 0 0 1 110 512"/>
-  </defs>
-
-  <!-- Outer orange ring -->
-  <circle cx="512" cy="512" r="338" fill="none" stroke="#f58600" stroke-width="44"/>
-
-  <!-- Circular text -->
-  <g fill="#b91500" font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" letter-spacing="5">
-    <text font-size="94">
-      <textPath href="#topArc" startOffset="50%" text-anchor="middle">DHANU COMPUTERS</textPath>
-    </text>
-    <text font-size="62">
-      <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">ONE STEP FOR DIGITAL LIFE</textPath>
-    </text>
-  </g>
-
-  <!-- Monitor shape -->
-  <g fill="#b91500">
-    <path d="M300 350 h424 a22 22 0 0 1 22 22 v220 a22 22 0 0 1 -22 22 h-424 a22 22 0 0 1 -22 -22 v-220 a22 22 0 0 1 22 -22zm26 46 a10 10 0 0 0 -10 10 v152 a10 10 0 0 0 10 10 h372 a10 10 0 0 0 10 -10 v-152 a10 10 0 0 0 -10 -10z"/>
-    <rect x="452" y="607" width="120" height="50" rx="25"/>
-    <path d="M398 673 h228 a83 83 0 0 1 83 83 h-394 a83 83 0 0 1 83 -83z"/>
-  </g>
-
-  <!-- Wi-Fi icon -->
-  <g fill="none" stroke="#f58600" stroke-width="15" stroke-linecap="round">
-    <path d="M252 444 q64 -58 128 0"/>
-    <path d="M269 472 q46 -41 92 0"/>
-    <path d="M286 500 q28 -25 56 0"/>
-  </g>
-  <circle cx="314" cy="527" r="11" fill="#f58600"/>
-
-  <!-- Bow + wrap highlights -->
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M620 308 q103 12 146 88 q38 70 -13 138" stroke="#b91500" stroke-width="34"/>
-    <path d="M747 455 q57 57 47 122 q-8 48 -30 88 q-24 47 -8 103" stroke="#b91500" stroke-width="30"/>
-    <path d="M548 302 q52 14 92 2" stroke="#f58600" stroke-width="18"/>
-    <path d="M742 449 q40 18 74 2" stroke="#f58600" stroke-width="18"/>
-    <path d="M744 565 q44 -16 83 8" stroke="#f58600" stroke-width="18"/>
-
-    <!-- white wrap marks -->
-    <path d="M685 398 q22 -18 48 -8" stroke="#ffffff" stroke-width="4"/>
-    <path d="M690 411 q23 -17 49 -7" stroke="#ffffff" stroke-width="4"/>
-    <path d="M696 424 q23 -16 49 -6" stroke="#ffffff" stroke-width="4"/>
-    <path d="M722 523 q18 -16 42 -8" stroke="#ffffff" stroke-width="4"/>
-    <path d="M728 535 q20 -15 43 -7" stroke="#ffffff" stroke-width="4"/>
-    <path d="M735 548 q20 -14 44 -6" stroke="#ffffff" stroke-width="4"/>
-  </g>
-
-  <!-- String + arrow -->
-  <g fill="none" stroke="#ef7b00" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="430" y1="286" x2="758" y2="695" stroke-width="5"/>
-    <line x1="430" y1="286" x2="520" y2="550" stroke-width="5"/>
-    <line x1="520" y1="550" x2="748" y2="372" stroke-width="5"/>
-    <line x1="520" y1="550" x2="486" y2="545" stroke-width="5"/>
-    <line x1="520" y1="550" x2="514" y2="586" stroke-width="5"/>
-  </g>
-  <polygon points="748,372 777,360 758,386" fill="none" stroke="#ef7b00" stroke-width="4"/>
-  <polygon points="486,545 465,560 504,562" fill="none" stroke="#ef7b00" stroke-width="4"/>
-  <polygon points="514,586 499,604 541,571" fill="none" stroke="#ef7b00" stroke-width="4"/>
-
-  <!-- since -->
-  <text x="512" y="790" text-anchor="middle" fill="#b91500" font-family="Arial, Helvetica, sans-serif" font-size="56">since 2013</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 986 937" aria-label="Dhanu Computers logo">
+  <!-- Exact approved logo reference -->
+  <image
+    href="https://img.sanishtech.com/u/bb673a89235b4b59d3c74ed03dcb4579.png"
+    x="0"
+    y="0"
+    width="986"
+    height="937"
+    preserveAspectRatio="xMidYMid meet" />
 </svg>
