@@ -1,0 +1,11 @@
+# Keep source vectors and markup as text
+*.svg text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+
+# Prevent binary diff/render errors for icon/logo assets
+*.png binary
+*.ico binary
